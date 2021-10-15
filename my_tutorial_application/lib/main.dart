@@ -1,79 +1,62 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:my_tutorial_application/widgets/photo_card.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
+
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  int counter = 0;
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Latihan Row dan Column'),
-        ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Container(
-              height: 250,
-              margin: const EdgeInsets.all(10),
-              padding: const EdgeInsets.all(10),
-              color: Colors.lightBlueAccent,
-              child: Column(
+        appBar: AppBar(title: const Text('Stateless Stateful Widget')),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                counter.toString(),
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 30.0 + counter,
+                ),
+              ),
+              const SizedBox(
+                height: 50,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  const Padding(
-                    padding: EdgeInsets.only(bottom: 5),
-                    child: Text(
-                      'ALBUM 1',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                          color: Colors.white),
-                    ),
+                  ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        counter++;
+                      });
+                    },
+                    child: const Text('+'),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: const [
-                      PhotoCard(text: 'Photo 1', backgroundColor: Colors.red),
-                      PhotoCard(text: 'Photo 2', backgroundColor: Colors.blue),
-                    ],
+                  ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        counter--;
+                      });
+                    },
+                    child: const Text('-'),
                   ),
                 ],
-              ),
-            ),
-            Container(
-              height: 250,
-              margin: const EdgeInsets.all(10),
-              padding: const EdgeInsets.all(10),
-              color: Colors.lightBlueAccent,
-              child: Column(
-                children: [
-                  const Padding(
-                    padding: EdgeInsets.only(bottom: 5),
-                    child: Text(
-                      'ALBUM 2',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                          color: Colors.white),
-                    ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: const [
-                      PhotoCard(text: 'Photo 3', backgroundColor: Colors.green),
-                      PhotoCard(text: 'Photo 4', backgroundColor: Colors.amber),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ],
+              )
+            ],
+          ),
         ),
       ),
     );
