@@ -51,7 +51,14 @@ class _MyAppState extends State<MyApp> {
                 itemBuilder: (context, index) {
                   return Text(
                     'Data ke-$index',
-                    style: const TextStyle(fontSize: 25),
+                    style: const TextStyle(
+                      fontSize: 25,
+                      fontFamily: "Festive",
+                      decoration: TextDecoration.underline,
+                      decorationStyle: TextDecorationStyle.dashed,
+                      decorationThickness: 3,
+                      decorationColor: Colors.blue,
+                    ),
                   );
                 },
               ),
