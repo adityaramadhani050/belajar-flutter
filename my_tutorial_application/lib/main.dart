@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -13,57 +15,26 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  int counter = 0;
+  Random random = Random();
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(title: const Text('List & ListView')),
-        body: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      counter++;
-                    });
-                  },
-                  child: const Text('Tambah'),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      if (counter > 0) {
-                        counter--;
-                      }
-                    });
-                  },
-                  child: const Text('Kurang'),
-                ),
-              ],
+        appBar: AppBar(title: const Text('Animated Container')),
+        body: Center(
+          child: GestureDetector(
+            onTap: () {
+              setState(() {});
+            },
+            child: AnimatedContainer(
+              duration: const Duration(seconds: 1),
+              width: 50.0 + random.nextInt(101),
+              height: 50.0 + random.nextInt(101),
+              color: Color.fromRGBO(random.nextInt(256), random.nextInt(256),
+                  random.nextInt(256), 1),
             ),
-            Expanded(
-              child: ListView.builder(
-                itemCount: counter,
-                itemBuilder: (context, index) {
-                  return Text(
-                    'Data ke-$index',
-                    style: const TextStyle(
-                      fontSize: 25,
-                      fontFamily: "Festive",
-                      decoration: TextDecoration.underline,
-                      decorationStyle: TextDecorationStyle.dashed,
-                      decorationThickness: 3,
-                      decorationColor: Colors.blue,
-                    ),
-                  );
-                },
-              ),
-            ),
-          ],
+          ),
         ),
       ),
     );
