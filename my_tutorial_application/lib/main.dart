@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -7,34 +5,59 @@ void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
-
-  @override
-  _MyAppState createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  Random random = Random();
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(title: const Text('Animated Container')),
-        body: Center(
-          child: GestureDetector(
-            onTap: () {
-              setState(() {});
-            },
-            child: AnimatedContainer(
-              duration: const Duration(seconds: 1),
-              width: 50.0 + random.nextInt(101),
-              height: 50.0 + random.nextInt(101),
-              color: Color.fromRGBO(random.nextInt(256), random.nextInt(256),
-                  random.nextInt(256), 1),
+        appBar: AppBar(title: const Text('Flexible Layout')),
+        body: Column(
+          children: [
+            Flexible(
+              flex: 1,
+              child: Row(
+                children: [
+                  Flexible(
+                    flex: 1,
+                    child: Container(
+                      color: Colors.red,
+                      margin: const EdgeInsets.all(5),
+                    ),
+                  ),
+                  Flexible(
+                    flex: 1,
+                    child: Container(
+                      color: Colors.yellow,
+                      margin: const EdgeInsets.all(5),
+                    ),
+                  ),
+                  Flexible(
+                    flex: 1,
+                    child: Container(
+                      color: Colors.orange,
+                      margin: const EdgeInsets.all(5),
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
+            Flexible(
+              flex: 2,
+              child: Container(
+                color: Colors.green,
+                margin: const EdgeInsets.all(5),
+              ),
+            ),
+            Flexible(
+              flex: 1,
+              child: Container(
+                color: Colors.blue,
+                margin: const EdgeInsets.all(5),
+              ),
+            ),
+          ],
         ),
       ),
     );
