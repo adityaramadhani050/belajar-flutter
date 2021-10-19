@@ -6,108 +6,93 @@ void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  int _counter = 0;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(title: const Text('Stack & Align Widget')),
-        body: Stack(
+        appBar: AppBar(title: const Text('Image & Spacer Widget')),
+        body: Column(
           children: [
-            Column(
+            const Spacer(
+              flex: 2,
+            ),
+            Row(
               children: [
-                Flexible(
-                  flex: 1,
-                  child: Row(
-                    children: [
-                      Flexible(
-                        flex: 1,
-                        child: Container(
-                          color: Colors.grey,
-                        ),
-                      ),
-                      Flexible(
-                        flex: 1,
-                        child: Container(
-                          color: Colors.blueGrey,
-                        ),
-                      )
-                    ],
+                const Spacer(
+                  flex: 3,
+                ),
+                Container(
+                  width: 120,
+                  height: 120,
+                  color: Colors.grey,
+                  child: const Image(
+                    fit: BoxFit.cover,
+                    image: NetworkImage(
+                        'https://asset.winnetnews.com/uploads/images/nisa-1585199938.jpg'),
                   ),
                 ),
-                Flexible(
+                const Spacer(
                   flex: 1,
-                  child: Row(
-                    children: [
-                      Flexible(
-                        flex: 1,
-                        child: Container(
-                          color: Colors.blueGrey,
-                        ),
-                      ),
-                      Flexible(
-                        flex: 1,
-                        child: Container(
-                          color: Colors.grey,
-                        ),
-                      )
-                    ],
+                ),
+                Container(
+                  width: 120,
+                  height: 120,
+                  color: Colors.grey,
+                  child: const Image(
+                    fit: BoxFit.cover,
+                    image: NetworkImage(
+                      'https://i.pinimg.com/564x/56/2f/21/562f21dce3de6e2720c9c799e3f6da5a.jpg',
+                    ),
                   ),
-                )
+                ),
+                const Spacer(
+                  flex: 3,
+                ),
               ],
             ),
-            Padding(
-              padding: const EdgeInsets.all(10),
-              child: ListView.builder(
-                itemCount: _counter,
-                itemBuilder: (_, index) => Text(
-                  'Ini adalah teks ke-${index + 1}',
-                  style: const TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,
+            const Spacer(
+              flex: 1,
+            ),
+            Row(
+              children: [
+                const Spacer(
+                  flex: 1,
+                ),
+                Container(
+                  width: 120,
+                  height: 120,
+                  color: Colors.grey,
+                  child: const Image(
+                    fit: BoxFit.cover,
+                    image: NetworkImage(
+                      'https://img.kpopmap.com/960x0/2020/04/ITZY-For-ELLE-Korea-Magazine-April-Issue-7.jpg',
+                    ),
                   ),
                 ),
-              ),
+                const Spacer(
+                  flex: 3,
+                ),
+                Container(
+                  width: 120,
+                  height: 120,
+                  color: Colors.grey,
+                  child: const Image(
+                    fit: BoxFit.cover,
+                    image: NetworkImage(
+                      'https://i.pinimg.com/736x/df/c0/49/dfc04917ba03e008acdda586cf4b30c7.jpg',
+                    ),
+                  ),
+                ),
+                const Spacer(
+                  flex: 1,
+                ),
+              ],
             ),
-            Align(
-              alignment: const Alignment(0, 0.8),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      setState(() {
-                        _counter++;
-                      });
-                    },
-                    child: const Text('Tambah'),
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(Colors.green),
-                    ),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                      setState(() {
-                        if (_counter > 0) {
-                          _counter--;
-                        }
-                      });
-                    },
-                    child: const Text('Kurang'),
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(Colors.red),
-                    ),
-                  ),
-                ],
-              ),
+            const Spacer(
+              flex: 6,
             ),
           ],
         ),
