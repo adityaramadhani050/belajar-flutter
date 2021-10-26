@@ -6,93 +6,109 @@ void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  Color _targetColor = Colors.grey;
+  bool _isAccepted = false;
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(title: const Text('Image & Spacer Widget')),
+        appBar: AppBar(title: const Text('Draggable WIdget')),
         body: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            const Spacer(
-              flex: 2,
-            ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                const Spacer(
-                  flex: 3,
-                ),
-                Container(
-                  width: 120,
-                  height: 120,
-                  color: Colors.grey,
-                  child: const Image(
-                    fit: BoxFit.cover,
-                    image: NetworkImage(
-                        'https://asset.winnetnews.com/uploads/images/nisa-1585199938.jpg'),
+                Draggable<Color>(
+                  data: Colors.red,
+                  feedback: SizedBox(
+                    width: 50,
+                    height: 50,
+                    child: Material(
+                      color: Colors.red.withOpacity(0.5),
+                      shape: const StadiumBorder(),
+                    ),
                   ),
-                ),
-                const Spacer(
-                  flex: 1,
-                ),
-                Container(
-                  width: 120,
-                  height: 120,
-                  color: Colors.grey,
-                  child: const Image(
-                    fit: BoxFit.cover,
-                    image: NetworkImage(
-                      'https://i.pinimg.com/564x/56/2f/21/562f21dce3de6e2720c9c799e3f6da5a.jpg',
+                  child: const SizedBox(
+                    width: 50,
+                    height: 50,
+                    child: Material(
+                      color: Colors.red,
+                      shape: StadiumBorder(),
+                    ),
+                  ),
+                  childWhenDragging: const SizedBox(
+                    width: 50,
+                    height: 50,
+                    child: Material(
+                      color: Colors.grey,
+                      shape: StadiumBorder(),
                     ),
                   ),
                 ),
-                const Spacer(
-                  flex: 3,
+                Draggable<Color>(
+                  data: Colors.yellow,
+                  child: const SizedBox(
+                    width: 50,
+                    height: 50,
+                    child: Material(
+                      color: Colors.yellow,
+                      shape: StadiumBorder(),
+                    ),
+                  ),
+                  feedback: SizedBox(
+                    width: 50,
+                    height: 50,
+                    child: Material(
+                      color: Colors.yellow.withOpacity(0.5),
+                      shape: const StadiumBorder(),
+                    ),
+                  ),
+                  childWhenDragging: const SizedBox(
+                    width: 50,
+                    height: 50,
+                    child: Material(
+                      color: Colors.grey,
+                      shape: StadiumBorder(),
+                    ),
+                  ),
                 ),
               ],
             ),
-            const Spacer(
-              flex: 1,
-            ),
-            Row(
-              children: [
-                const Spacer(
-                  flex: 1,
-                ),
-                Container(
-                  width: 120,
-                  height: 120,
-                  color: Colors.grey,
-                  child: const Image(
-                    fit: BoxFit.cover,
-                    image: NetworkImage(
-                      'https://img.kpopmap.com/960x0/2020/04/ITZY-For-ELLE-Korea-Magazine-April-Issue-7.jpg',
-                    ),
-                  ),
-                ),
-                const Spacer(
-                  flex: 3,
-                ),
-                Container(
-                  width: 120,
-                  height: 120,
-                  color: Colors.grey,
-                  child: const Image(
-                    fit: BoxFit.cover,
-                    image: NetworkImage(
-                      'https://i.pinimg.com/736x/df/c0/49/dfc04917ba03e008acdda586cf4b30c7.jpg',
-                    ),
-                  ),
-                ),
-                const Spacer(
-                  flex: 1,
-                ),
-              ],
-            ),
-            const Spacer(
-              flex: 6,
+            DragTarget<Color>(
+              onWillAccept: (value) => true,
+              onAccept: (value) {
+                _isAccepted = true;
+                _targetColor = value;
+              },
+              builder: (context, candidates, rejected) {
+                return (_isAccepted)
+                    ? SizedBox(
+                        width: 100,
+                        height: 100,
+                        child: Material(
+                          color: _targetColor,
+                          shape: const StadiumBorder(),
+                        ),
+                      )
+                    : const SizedBox(
+                        width: 100,
+                        height: 100,
+                        child: Material(
+                          color: Colors.grey,
+                          shape: StadiumBorder(),
+                        ),
+                      );
+              },
             ),
           ],
         ),
